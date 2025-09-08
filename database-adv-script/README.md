@@ -10,15 +10,15 @@ SELECT b.booking_id, b.property_id, b.user_id, b.check_in, b.check_out, u.name A
 FROM Bookings b
 INNER JOIN Users u ON b.user_id = u.user_id;
 
-##  LEFT JOIN
-**Query:**
+## `**LEFT JOIN**`
+`**Query:**`
 ```sql
 SELECT p.property_id, p.name AS property_name, r.review_id, r.rating, r.comment
 FROM Properties p
 LEFT JOIN Reviews r ON p.property_id = r.property_id;
 
-##  FULL OUTER JOIN
-**Query:**
+##  `**FULL OUTER JOIN**`
+`**Query:**`
 ```sql
 SELECT u.user_id, u.name AS user_name, b.booking_id, b.property_id, b.check_in, b.check_out
 FROM Users u

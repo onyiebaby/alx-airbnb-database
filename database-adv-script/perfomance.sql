@@ -1,4 +1,4 @@
--- Initial query: retrieve all bookings with user, property, and payment details
+-- Initial query with WHERE and AND
 SELECT 
     b.booking_id,
     b.booking_date,
@@ -12,7 +12,9 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.user_id
 JOIN properties p ON b.property_id = p.property_id
-JOIN payments pay ON b.booking_id = pay.booking_id;
+JOIN payments pay ON b.booking_id = pay.booking_id
+WHERE b.booking_date >= '2024-01-01'
+  AND u.user_id IS NOT NULL;
 
 -- Analyze performance of the initial query
 EXPLAIN ANALYZE
@@ -29,10 +31,11 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.user_id
 JOIN properties p ON b.property_id = p.property_id
-JOIN payments pay ON b.booking_id = pay.booking_id;
+JOIN payments pay ON b.booking_id = pay.booking_id
+WHERE b.booking_date >= '2024-01-01'
+  AND u.user_id IS NOT NULL;
 
 -- Refactored query: optimized version
--- Removed unnecessary columns and relies on indexes for better performance
 SELECT 
     b.booking_id,
     b.booking_date,
@@ -42,7 +45,9 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.user_id
 JOIN properties p ON b.property_id = p.property_id
-JOIN payments pay ON b.booking_id = pay.booking_id;
+JOIN payments pay ON b.booking_id = pay.booking_id
+WHERE b.booking_date >= '2024-01-01'
+  AND u.user_id IS NOT NULL;
 
 -- Analyze performance of refactored query
 EXPLAIN ANALYZE
@@ -55,4 +60,6 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.user_id
 JOIN properties p ON b.property_id = p.property_id
-JOIN payments pay ON b.booking_id = pay.booking_id;
+JOIN payments pay ON b.booking_id = pay.booking_id
+WHERE b.booking_date >= '2024-01-01'
+  AND u.user_id IS NOT NULL;

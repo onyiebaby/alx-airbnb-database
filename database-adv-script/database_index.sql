@@ -14,13 +14,15 @@ CREATE INDEX idx_properties_name ON properties(name);
 -- Indexes for Reviews Table
 CREATE INDEX idx_reviews_property_id ON reviews(property_id);
 
-
--- Before index
-EXPLAIN SELECT * 
+-- Measure query performance before/after using EXPLAIN ANALYZE
+EXPLAIN ANALYZE 
+SELECT * 
 FROM bookings 
 WHERE user_id = 5;
 
--- After index
-EXPLAIN SELECT * 
-FROM bookings 
-WHERE user_id = 5;
+EXPLAIN ANALYZE
+SELECT p.name, COUNT(b.booking_id)
+FROM properties p
+JOIN bookings b ON p.property_id = b.property_id
+GROUP BY p.name
+ORDER BY COUNT(b.booking_id) DESC;

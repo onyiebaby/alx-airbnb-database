@@ -14,3 +14,13 @@ CREATE INDEX idx_properties_name ON properties(name);
 -- Indexes for Reviews Table
 CREATE INDEX idx_reviews_property_id ON reviews(property_id);
 
+
+-- Before index
+EXPLAIN SELECT * 
+FROM bookings 
+WHERE user_id = 5;
+
+-- After index
+EXPLAIN SELECT * 
+FROM bookings 
+WHERE user_id = 5;
